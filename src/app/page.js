@@ -2,100 +2,144 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <main className="bg-black-A text-white-A lg:py-0 font-montserrat">
+      <section className="relative h-screen flex flex-col items-start justify-center">
+        <div className="z-10 text-center">
+          <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold font-frank md:px-10 px-10">
+            Let Your Soul Soar
+          </h1>
+          <h2 className="text-2xl md:text-4xl lg:text-8xl  md:text-8xl font-bold mt-4 font-frank md:px-10 px-10">
+            with NIKI's Sound
+          </h2>
+          <p className="text-lg md:text-xl mt-8 px-4 md:px-16 lg:px-40 lg:text-xl">
+            Join NIKI for a night of soulful melodies and heartfelt lyrics that
+            will move you. Let the music connect and inspire in an unforgettable
+            experience.
+          </p>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+
+      {/* First Image After Main Section */}
+      <section className="relative w-full h-[500px] mt-[-100px] ">
+        <Image
+          src="/assets/landing/niki1.png"
+          alt="NIKI"
+          layout="fill"
+          objectFit="cover"
+          className="object-center"
+        />
+      </section>
+
+      {/* Nicole's Tour Section */}
+      <section className="py-16 px-4 md:px-8 lg:px-16">
+        <h2 className="text-4xl md:text-6xl font-bold text-center mb-20 font-frank">
+          NICOLE's TOUR
+        </h2>
+
+        {/* Tour Event Grid with Description Under Image */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Tour Event 1 */}
+          <div className="flex flex-col items-center">
+            <div className="w-full max-w-[600px]">
+              <div className="relative w-full pb-[50%]">
+                <Image
+                  src="/assets/landing/niki2.png"
+                  alt="Nicole Tour"
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-md"
+                />
+              </div>
+              <div className="text-center lg:text-start mt-4">
+                <h3 className="text-2xl lg:text-3xl font-bold mb-2 font-frank">
+                  Nicole Tour
+                </h3>
+                <p className="text-gray-300 mb-2 text-sm">8 September 2022</p>
+                <p className="text-sm lg:text-lg text-gray-400">
+                  NIKI kicked off The Nicole Tour in Vancouver with a vibrant,
+                  energetic performance at Malkin Bowl. As her first headlining
+                  tour, the show celebrated the release of her album Nicole,
+                  with heartfelt connections and captivating music filling the
+                  night.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Tour Event 2 */}
+          <div className="flex flex-col items-center justify-end lg:mt-[200px]">
+            <div className="w-full max-w-[600px]">
+              <div className="relative w-full pb-[50%]">
+                <Image
+                  src="/assets/landing/niki3.png"
+                  alt="Nicole Tour Jakarta"
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-md"
+                />
+              </div>
+              <div className="text-center lg:text-end mt-4">
+                <h3 className="text-2xl lg:text-3xl font-bold mb-2 font-frank">
+                  Nicole Tour Jakarta
+                </h3>
+                <p className="text-gray-300 mb-2 text-sm">26 September 2023</p>
+                <p className="text-sm lg:text-lg text-gray-400">
+                  NIKI dazzled 8,000 fans at her Nicole Live in Jakarta 2023
+                  concert at JIEXPO with a mix of hits like "Before" and
+                  "Selene," and personal moments like "Anaheim."
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Tour Event 3 */}
+          <div className="flex flex-col items-center justify-start lg:mt-[-100px]">
+            <div className="w-full max-w-[600px]">
+              <div className="relative w-full pb-[50%]">
+                <Image
+                  src="/assets/landing/niki4.png"
+                  alt="Nicole Tour"
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-md"
+                />
+              </div>
+              <div className="text-center lg:text-start mt-4">
+                <h3 className="text-2xl lg:text-3xl font-bold mb-2 font-frank">
+                  Nicole Tour
+                </h3>
+                <p className="text-gray-300 mb-2 text-sm">8 September 2022</p>
+                <p className="text-sm lg:text-lg text-gray-400">
+                  NIKI kicked off The Nicole Tour in Vancouver with a vibrant,
+                  energetic performance at Malkin Bowl. As her first headlining
+                  tour, the show celebrated the release of her album Nicole,
+                  with heartfelt connections and captivating music filling the
+                  night.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Call to Action Section */}
+      <section className="relative py-24 px-4 md:px-8 lg:px-16 lg:mx-8 flex flex-col items-center justify-center opacity-70">
+        <div className="z-10 text-center">
+          <h2 className="text-4xl md:text-6xl font-bold text-white-A font-frank">
+            GET YOURS RIGHT NOW
+          </h2>
+          <button className="bg-white-A text-black-A font-bold py-4 px-8 mt-8 hover:bg-gray-400 transition duration-300">
+            BUY NOW
+          </button>
+        </div>
+        <Image
+          src="/assets/landing/niki5.jpg"
+          alt="NIKI"
+          layout="fill"
+          objectFit="cover"
+          className="absolute inset-0 object-center"
+        />
+      </section>
+    </main>
   );
 }

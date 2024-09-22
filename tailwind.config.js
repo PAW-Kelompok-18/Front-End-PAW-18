@@ -8,8 +8,16 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        black: {
+          A: "#0C0807",
+        },
+        white: {
+          A: "#F8F8F8",
+        },
+      },
+      fontFamily: {
+        frank: ['"Frank Ruhl Libre"', "serif"],
+        montserrat: ["Montserrat", "sans-serif"],
       },
     },
   },
