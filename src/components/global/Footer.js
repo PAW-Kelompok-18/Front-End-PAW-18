@@ -18,7 +18,7 @@ export default function Footer() {
               <RiTwitterXFill className="w-[24px] h-[24px]" />
             </Link>
             <Link href="#">
-              <RiFacebookCircleFill classname="w-[36px] h-[36px]" />
+              <RiFacebookCircleFill className="w-[36px] h-[36px]" />
             </Link>
           </div>
         </div>
