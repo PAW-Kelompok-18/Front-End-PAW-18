@@ -1,6 +1,10 @@
+"use client";
 import Image from "next/image";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
+
   return (
     <main className="bg-black-A text-white-A lg:py-0 font-montserrat">
       <section className="relative h-screen flex flex-col items-start justify-center">
@@ -128,7 +132,10 @@ export default function Home() {
           <h2 className="text-4xl md:text-6xl font-bold text-white-A font-frank">
             GET YOURS RIGHT NOW
           </h2>
-          <button className="bg-white-A text-black-A font-bold py-4 px-8 mt-8 hover:bg-gray-400 transition duration-300">
+          <button
+            className="bg-white-A text-black-A font-bold py-4 px-8 mt-8 hover:bg-gray-400 transition duration-300"
+            onClick={() => router.push("/ticket")}
+          >
             BUY NOW
           </button>
         </div>
