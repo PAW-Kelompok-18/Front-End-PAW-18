@@ -56,7 +56,7 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Navbar List - Centered */}
+        {/* Navbar List */}
         {!screenType.isMobile && (
           <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center space-x-8">
             {navbar_list.map((item, index) => (
@@ -65,7 +65,7 @@ export default function Navbar() {
                 className={twMerge(
                   "font-medium text-[16px]",
                   pathname === item.path
-                    ? "text-white"
+                    ? "text-white text-bold"
                     : "text-gray-400 hover:text-white"
                 )}
                 onClick={() => router.push(item.path)}
@@ -93,7 +93,7 @@ export default function Navbar() {
             </button>
           ) : (
             <button
-              className="bg-white text-black font-medium text-[16px] px-6 py-2 rounded"
+              className="bg-white-A text-black-A font-medium text-[16px] px-6 py-2 rounded"
               onClick={() => router.push("/login")}
             >
               Login
