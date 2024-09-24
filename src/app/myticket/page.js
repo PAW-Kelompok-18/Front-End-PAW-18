@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { Calendar, MapPin, Music, Trash2 } from 'lucide-react';
-import { seatBookingApi } from '../../api/SeatBookingApi';
+import { seatBookingApi } from '../../api/seatBookingApi';
 
 export default function EventDashboard() {
   const [transactions, setTransactions] = useState([]);
