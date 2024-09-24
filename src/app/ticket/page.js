@@ -1,7 +1,9 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { FaCouch } from 'react-icons/fa';
-import { seatBookingApi } from '../../api/SeatBookingApi';
+import { seatBookingApi } from '../../api/seatBookingApi';
+import { Bounce, ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SeatBooking = () => {
   const [selectedSeats, setSelectedSeats] = useState([]);
@@ -57,7 +59,7 @@ const SeatBooking = () => {
         return;
       }
 
-      await seatBookingApi.updateTransactionStatus(currentTransaction._id);
+      await seatBookingApi.updateTransactionStatus();
 
       setSeats((prevSeats) =>
         prevSeats.map((seat) =>
@@ -77,6 +79,19 @@ const SeatBooking = () => {
 
   return (
     <div className="bg-black text-white min-h-screen p-4 lg:pt-[100px] lg:px-[120px] overflow-hidden">
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition={Bounce}
+      />
       <div className="w-full h-20 bg-gray-800 rounded-t-full mb-10"></div>
       <div className="w-full max-w-4xl mx-auto p-4 bg-gray-900 rounded-lg">
         <div className="grid grid-cols-10 gap-4">
