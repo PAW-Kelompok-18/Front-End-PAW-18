@@ -1,34 +1,39 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { Calendar, MapPin, Music } from 'lucide-react';
-import axios from 'axios';
+import { Calendar, MapPin, Music, Trash2 } from 'lucide-react';
+import { seatBookingApi } from '../../api/SeatBookingApi';
 
 export default function EventDashboard() {
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const testhardcode = [
-    {
-      _id: '1',
-      status: 'completed',
-      seats: [
-        {
-          number: 'A1',
-          event: {
-            title: 'Sample Concert',
-            date: '2023-09-30T20:00:00Z',
-            location: 'Sample Venue',
-          },
-        },
-      ],
-    },
-  ];
-
   useEffect(() => {
-    setTransactions(testhardcode);
-    setLoading(false);
+    fetchTransactions();
   }, []);
+
+  const fetchTransactions = async () => {
+    try {
+      const data = await seatBookingApi.getUserTransactions();
+      setTransactions(data);
+      setLoading(false);
+    } catch (err) {
+      console.error('Error fetching transactions:', err);
+      setError('Failed to fetch transactions. Please try again later.');
+      setLoading(false);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await seatBookingApi.deleteTransaction(id);
+      // Refresh the transactions list after successful deletion
+      fetchTransactions();
+    } catch (err) {
+      console.error('Error deleting transaction:', err);
+      setError('Failed to delete transaction. Please try again later.');
+    }
+  };
 
   if (loading) return <div className="text-center mt-8">Loading...</div>;
   if (error)
@@ -60,8 +65,7 @@ export default function EventDashboard() {
               <Music className="inline mr-2" size={16} />
               <span className="mr-2">Concerts</span>
               <span className="bg-white text-gray-800 px-2 py-1 rounded-full text-xs">
-                {completedTransactions.length}{' '}
-                {/* Assuming all are concerts for simplicity */}
+                {completedTransactions.length}
               </span>
             </button>
           </div>
@@ -70,46 +74,39 @@ export default function EventDashboard() {
             {completedTransactions.map((transaction) => (
               <div key={transaction._id} className="bg-gray-800 rounded-lg p-4">
                 <h3 className="text-xl font-semibold mb-2">
-                  {transaction.seats[0]?.event?.title ||
-                    'Event Title Not Available'}
+                  Niki Concert Ticket Jakarta
                 </h3>
                 <div className="flex items-center text-gray-400 mb-2">
                   <Calendar className="mr-2" size={16} />
                   <span>
-                    {transaction.seats[0]?.event?.date
-                      ? new Date(
-                          transaction.seats[0].event.date
-                        ).toLocaleDateString()
-                      : 'Date Not Available'}
+                    {new Date(transaction.createdAt).toLocaleDateString()}
                   </span>
                   <span className="mx-2">•</span>
                   <span>
-                    {transaction.seats[0]?.event?.date
-                      ? new Date(
-                          transaction.seats[0].event.date
-                        ).toLocaleTimeString([], {
-                          hour: '2-digit',
-                          minute: '2-digit',
-                        })
-                      : 'Time Not Available'}
+                    {new Date(transaction.createdAt).toLocaleTimeString([], {
+                      hour: '2-digit',
+                      minute: '2-digit',
+                    })}
                   </span>
                 </div>
                 <div className="flex items-center text-gray-400 mb-4">
                   <MapPin className="mr-2" size={16} />
-                  <span>
-                    {transaction.seats[0]?.event?.location ||
-                      'Location Not Available'}
-                  </span>
+                  <span>Istora Senayan</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-pink-500">
                     Seat Numbers:{' '}
-                    {transaction.seats.map((seat) => seat.number).join(', ') ||
-                      'Not Available'}
+                    {transaction.seats
+                      .map((seat) => seat.seatNumber)
+                      .join(', ')}
                   </span>
-                  <span className="bg-pink-500 text-white px-2 py-1 rounded-full text-xs">
-                    {transaction.seats.length}
-                  </span>
+                  <button
+                    onClick={() => handleDelete(transaction._id)}
+                    className="bg-red-500 text-white p-2 rounded-full hover:bg-red-600 transition-colors"
+                    aria-label="Delete transaction"
+                  >
+                    <Trash2 size={16} />
+                  </button>
                 </div>
               </div>
             ))}
