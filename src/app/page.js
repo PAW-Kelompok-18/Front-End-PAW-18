@@ -1,41 +1,85 @@
-"use client";
-import Image from "next/image";
-import { useRouter, usePathname } from "next/navigation";
+'use client';
+import Image from 'next/image';
+import { useRouter, usePathname } from 'next/navigation';
+import { motion } from 'framer-motion';
 
 export default function Home() {
   const router = useRouter();
 
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggedChildren: 0.3,
+      },
+    },
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 30 },
+    show: { opacity: 1, y: 0, transition: { type: 'smoth' } },
+  };
+
+  const image = {
+    hidden: { opacity: 0, y: 30 },
+    show: { opacity: 1, y: 0, transition: { type: 'smoth' } },
+  };
+
   return (
     <main className="bg-black-A text-white-A lg:py-0 font-montserrat">
       <section className="relative h-screen flex flex-col items-start justify-center">
-        <div className="z-10 text-center">
-          <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold font-frank md:px-10 px-10">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={container}
+          duration={0.9}
+          className="z-10 text-center"
+        >
+          <motion.h1
+            variants={item}
+            className="text-4xl md:text-6xl lg:text-8xl font-bold font-frank md:px-10 px-10"
+          >
             Let Your Soul Soar
-          </h1>
-          <h2 className="text-2xl md:text-4xl lg:text-8xl  md:text-8xl font-bold mt-4 font-frank md:px-10 px-10">
+          </motion.h1>
+          <motion.h2
+            variants={item}
+            className="text-2xl md:text-4xl lg:text-8xl  md:text-8xl font-bold mt-4 font-frank md:px-10 px-10"
+          >
             with NIKI's Sound
-          </h2>
-          <p className="text-lg md:text-xl mt-8 px-4 md:px-16 lg:px-40 lg:text-xl">
+          </motion.h2>
+          <motion.p
+            variants={item}
+            className="text-lg md:text-xl mt-8 px-4 md:px-16 lg:px-40 lg:text-xl"
+          >
             Join NIKI for a night of soulful melodies and heartfelt lyrics that
             will move you. Let the music connect and inspire in an unforgettable
             experience.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
       </section>
 
       {/* First Image After Main Section */}
-      <section className="relative w-full h-[500px] mt-[-100px] ">
-        <Image
+      <motion.div
+        initial={{ y: 400, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.2, type: 'keyframes' }}
+        className="relative w-full h-[500px] mt-[-100px]"
+      >
+        <motion.img
+          variants={image}
           src="/assets/landing/niki1.png"
           alt="NIKI"
           layout="fill"
           objectFit="cover"
           className="object-center"
         />
-      </section>
+      </motion.div>
 
       {/* Nicole's Tour Section */}
-      <section className="py-16 px-4 md:px-8 lg:px-16">
+      <section className="py-16 px-4 md:px-8 lg:px-16 pt-[350px]">
         <h2 className="text-4xl md:text-6xl font-bold text-center mb-20 font-frank">
           NICOLE's TOUR
         </h2>
@@ -127,14 +171,14 @@ export default function Home() {
       </section>
 
       {/* Call to Action Section */}
-      <section className="relative py-24 px-4 md:px-8 lg:px-16 lg:mx-8 flex flex-col items-center justify-center opacity-70">
+      <section className="relative py-24 px-4 md:px-8 lg:px-16 lg:mx-8 flex flex-col items-center justify-center opacity-100">
         <div className="z-10 text-center">
           <h2 className="text-4xl md:text-6xl font-bold text-white-A font-frank">
             GET YOURS RIGHT NOW
           </h2>
           <button
-            className="bg-white-A text-black-A font-bold py-4 px-8 mt-8 hover:bg-gray-400 transition duration-300"
-            onClick={() => router.push("/ticket")}
+            className="border-4 border-white-A text-white-A hover:text-black-A font-bold py-4 px-8 mt-8 hover:bg-white-A transition duration-300"
+            onClick={() => router.push('/ticket')}
           >
             BUY NOW
           </button>

@@ -9,11 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "axios": "^1.7.7",
+    "framer-motion": "^11.5.6",
+    "lucide-react": "^0.445.0",
+    "music": "^0.0.4",
     "next": "14.2.13",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.3.0",
     "react-screentype-hook": "^1.0.18",
+    "react-toastify": "^10.0.5",
     "tailwind-merge": "^2.5.2"
   },
   "devDependencies": {

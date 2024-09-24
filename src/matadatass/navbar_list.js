@@ -8,7 +8,11 @@ export const navbar_list = [
     path: "/ticket",
   },
   {
-    name: "About",
-    path: "/about",
+    name: "Contact",
+    path: "/contact",
+  },
+  {
+    name: "My Ticket",
+    path: "/myticket",
   },
 ];
