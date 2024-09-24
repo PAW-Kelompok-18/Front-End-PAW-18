@@ -1,19 +1,24 @@
-'use client';
+"use client";
 import React, { useState, useEffect } from 'react';
 import { FaCouch } from 'react-icons/fa';
 import { seatBookingApi } from '../../api/seatBookingApi';
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import getCookie from '../../api/CookieeHandler';
+import { Cookie } from 'next/font/google';
 
 const SeatBooking = () => {
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [seats, setSeats] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentTransaction, setCurrentTransaction] = useState(null);
+  const token = getCookie();
 
   useEffect(() => {
     const fetchSeats = async () => {
       try {
+        // const seatData = await seatBookingApi.getSeats();
+        // withCredentials: true
         const seatData = await seatBookingApi.getSeats();
         setSeats(seatData);
       } catch (error) {
