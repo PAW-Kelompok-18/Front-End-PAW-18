@@ -1,17 +1,38 @@
-// src/api/seatBookingApi.js
-
 import axios from 'axios';
-import { Bounce, ToastContainer, toast } from 'react-toastify';
+import { Bounce, toast } from 'react-toastify';
+import getCookies from './CookieeHandler';
 
+// Base API URL
 const API_BASE_URL =
   process.env.NODE_ENV === 'development' ? process.env.NEXT_PUBLIC_API_URL : '';
+
+// Create Axios instance with default settings
+const axiosInstance = axios.create({
+  baseURL: API_BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+// Add a request interceptor to include token in headers
+axiosInstance.interceptors.request.use(
+  async (config) => {
+    const token = await getCookies(); // Retrieve token from cookies
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 export const seatBookingApi = {
   getSeats: async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/seat`);
+      const response = await axiosInstance.get('/seat');
       return response.data;
-      console.log(response.data);
     } catch (error) {
       console.error('Failed to fetch seats:', error);
       throw error;
@@ -21,7 +42,7 @@ export const seatBookingApi = {
   createTransaction: async (selectedSeatIds) => {
     toast('Creating transaction...');
     try {
-      const response = await axios.post(`${API_BASE_URL}/transactions`, {
+      const response = await axiosInstance.post('/transactions', {
         seats: selectedSeatIds,
       });
       toast.success('Transaction created successfully!', {
@@ -36,32 +57,48 @@ export const seatBookingApi = {
   },
 
   getUserTransactions: async () => {
-    const response = await axios.get(`${API_BASE_URL}/transactions`);
-    return response.data;
+    try {
+      const response = await axiosInstance.get('/transactions');
+      return response.data;
+    } catch (error) {
+      console.error('Failed to fetch user transactions:', error);
+      throw error;
+    }
   },
 
   getTransactionById: async (id) => {
-    const response = await axios.get(`${API_BASE_URL}/transactions/${id}`);
-    return response.data;
+    try {
+      const response = await axiosInstance.get(`/transactions/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error(`Failed to fetch transaction with ID ${id}:`, error);
+      throw error;
+    }
   },
 
   updateTransactionStatus: async () => {
     try {
-      const response = await axios.patch(
-        `${API_BASE_URL}/transactions/confirm`
-      );
+      const response = await axiosInstance.patch('/transactions/confirm');
       toast.success('Transaction confirmed successfully!');
       return response.data;
     } catch (error) {
       console.error('Failed to update transaction status:', error);
       toast.error(
-        'Failed to update transaction status. Please try again later'
+        'Failed to update transaction status. Please try again later.'
       );
       throw error;
     }
   },
 
   deleteTransaction: async (id) => {
-    await axios.delete(`${API_BASE_URL}/transactions/${id}`);
+    try {
+      const response = await axiosInstance.delete(`/transactions/${id}`);
+      toast.success('Ticket cancelled successfully!');
+      return response.data;
+    } catch (error) {
+      console.error(`Failed to delete transaction with ID ${id}:`, error);
+      toast.error('Failed to delete transaction. Please try again later.');
+      throw error;
+    }
   },
 };
