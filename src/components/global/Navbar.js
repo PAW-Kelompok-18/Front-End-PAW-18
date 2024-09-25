@@ -11,6 +11,7 @@ import { RiMenu4Fill } from 'react-icons/ri';
 import { HiX } from 'react-icons/hi';
 import { navbar_list } from '@/matadatass/navbar_list';
 import getCookies from '@/api/CookieeHandler';
+import deleteCookies from '@/api/LogoutHandler';
 
 export default function Navbar() {
   const screenType = useScreenType();
@@ -39,10 +40,10 @@ export default function Navbar() {
   }, [isMobileMenuOpen]);
 
   const handleLogout = () => {
-    // Clear cookies or handle logout logic
-    document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-    setToken(null);
-    router.push('/login');
+    // document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    deleteCookies(); // Delete all cookies
+    setToken(undefined);
+    router.push('/');
   };
 
   return (
